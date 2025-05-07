@@ -73,6 +73,10 @@ body{
 
     .header_nav_left{
         display: none;
+
+        p{
+            color: #ccc;
+        }
     }
     
     .header_nav_right{
