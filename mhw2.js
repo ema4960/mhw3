@@ -3,19 +3,22 @@ let buttonLogin = document.querySelector("#login_button");
 buttonLogin.addEventListener("click", onClickLogin);
 let start =true;
 
-let city="catania";
-fetch("https://api.weatherstack.com/current?access_key=5ad73db00b7a755eedcd15e6c9b43afa&query="+city+"&unit=m").then(response => response.json()).then(json => {
-    header=document.querySelector(".header_nav_left");
-    nuovoParagrafo = document.createElement("p");
-    nuovoParagrafo.innerHTML = json.current.feelslike+"°C in "+json.location.name;
-    
-    header.appendChild(nuovoParagrafo);
-    console.log(json.current.feelslike);
-}); 
+let city = document.querySelector("#city");
+city.addEventListener("blur",changeCity);
+changeCity();
+
+function changeCity(){
+    let inputcity = document.querySelector("#city").value;
+    let city= inputcity;
+    console.log("ciao");
+    fetch("https://api.weatherstack.com/current?access_key=&query="+city+"&unit=m").then(response => response.json()).then(json => {
+        temp=document.querySelector("#temp");
+        temp.innerHTML =json.current.feelslike+"°C in "+json.location.name;
+    }); 
+}
 
 
-fetch("http://data.fixer.io/api/latest?access_key=d4ad17443dcf0b294d5b7c91ce81cc85").then(response => response.json()).then(json => {
-    console.log(json);
+fetch("http://data.fixer.io/api/latest?access_key=").then(response => response.json()).then(json => {
     footerSocial=document.querySelector("#social");
     nuovoParagrafo = document.createElement("p");
     nuovoParagrafo.innerHTML ="quote di conversione giornaliere:<br>EUR 1 in AUD "+json.rates.AUD+"<br>EUR 1 in USD "+json.rates.USD+"<br>EUR 1 in GBP "+json.rates.USD;
@@ -23,13 +26,7 @@ fetch("http://data.fixer.io/api/latest?access_key=d4ad17443dcf0b294d5b7c91ce81cc
     footerSocial.appendChild(nuovoParagrafo);
 })
 
-    
-    //footerTitle=document.querySelector(".footer_title");
-    //footerTitle.innerHTML = +"current exange from USD to EUR is"+json.amount;
-    
-    //header.appendChild(nuovoParagrafo);
-    //console.log(json.current.feelslike);
-//});
+
 
 
 function onJson(json){
